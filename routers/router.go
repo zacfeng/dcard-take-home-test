@@ -1,6 +1,8 @@
 package routers
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,7 +12,7 @@ func SetupRouter() *gin.Engine {
 	router.Use(gin.Recovery())
 
 	router.GET("/rate", func(c *gin.Context) {
-		c.JSON(200, "rate limiting test")
+		c.String(http.StatusOK, "rate limiting test")
 	})
 
 	return router
