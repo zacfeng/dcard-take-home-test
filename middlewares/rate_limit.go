@@ -7,20 +7,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis"
+	"github.com/zacfeng/dcard-take-home-test/utils"
 )
 
 // RateLimit limit 60 rpm request
 func RateLimit() gin.HandlerFunc {
 
-	redisURL := "redis://localhost:6379/0"
-	option, err := redis.ParseURL(redisURL)
-
-	if err != nil {
-		panic(err)
-	}
-
-	client := redis.NewClient(option)
+	client := utils.GetRedisClient()
 
 	return func(c *gin.Context) {
 		key := c.ClientIP()
